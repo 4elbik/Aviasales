@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.3dfc2880.chunk.css",
-    "main.js": "/static/js/main.3c214a59.chunk.js",
-    "main.js.map": "/static/js/main.3c214a59.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.90b892f7.js",
-    "runtime-main.js.map": "/static/js/runtime-main.90b892f7.js.map",
-    "static/js/2.ef746f36.chunk.js": "/static/js/2.ef746f36.chunk.js",
-    "static/js/2.ef746f36.chunk.js.map": "/static/js/2.ef746f36.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.2cbcca33dfa45e16ceaef09c18b11b6e.js": "/precache-manifest.2cbcca33dfa45e16ceaef09c18b11b6e.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.3dfc2880.chunk.css.map": "/static/css/main.3dfc2880.chunk.css.map",
-    "static/js/2.ef746f36.chunk.js.LICENSE.txt": "/static/js/2.ef746f36.chunk.js.LICENSE.txt",
-    "static/media/check-mark.svg": "/static/media/check-mark.68ca57dc.svg",
-    "static/media/logo.svg": "/static/media/logo.0c089234.svg"
+    "main.css": "/Aviasales/static/css/main.3dfc2880.chunk.css",
+    "main.js": "/Aviasales/static/js/main.db14c407.chunk.js",
+    "main.js.map": "/Aviasales/static/js/main.db14c407.chunk.js.map",
+    "runtime-main.js": "/Aviasales/static/js/runtime-main.edd56b10.js",
+    "runtime-main.js.map": "/Aviasales/static/js/runtime-main.edd56b10.js.map",
+    "static/js/2.5712bf50.chunk.js": "/Aviasales/static/js/2.5712bf50.chunk.js",
+    "static/js/2.5712bf50.chunk.js.map": "/Aviasales/static/js/2.5712bf50.chunk.js.map",
+    "index.html": "/Aviasales/index.html",
+    "precache-manifest.c46f3be6a575812b1e93de646303bc69.js": "/Aviasales/precache-manifest.c46f3be6a575812b1e93de646303bc69.js",
+    "service-worker.js": "/Aviasales/service-worker.js",
+    "static/css/main.3dfc2880.chunk.css.map": "/Aviasales/static/css/main.3dfc2880.chunk.css.map",
+    "static/js/2.5712bf50.chunk.js.LICENSE.txt": "/Aviasales/static/js/2.5712bf50.chunk.js.LICENSE.txt",
+    "static/media/check-mark.svg": "/Aviasales/static/media/check-mark.68ca57dc.svg",
+    "static/media/logo.svg": "/Aviasales/static/media/logo.0c089234.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.90b892f7.js",
-    "static/js/2.ef746f36.chunk.js",
+    "static/js/runtime-main.edd56b10.js",
+    "static/js/2.5712bf50.chunk.js",
     "static/css/main.3dfc2880.chunk.css",
-    "static/js/main.3c214a59.chunk.js"
+    "static/js/main.db14c407.chunk.js"
   ]
 }
