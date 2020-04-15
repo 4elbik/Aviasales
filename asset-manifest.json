@@ -1,24 +1,25 @@
 {
   "files": {
-    "main.css": "/Aviasales/static/css/main.3dfc2880.chunk.css",
-    "main.js": "/Aviasales/static/js/main.db14c407.chunk.js",
-    "main.js.map": "/Aviasales/static/js/main.db14c407.chunk.js.map",
+    "main.css": "/Aviasales/static/css/main.ce2317e4.chunk.css",
+    "main.js": "/Aviasales/static/js/main.bc32668d.chunk.js",
+    "main.js.map": "/Aviasales/static/js/main.bc32668d.chunk.js.map",
     "runtime-main.js": "/Aviasales/static/js/runtime-main.edd56b10.js",
     "runtime-main.js.map": "/Aviasales/static/js/runtime-main.edd56b10.js.map",
-    "static/js/2.5712bf50.chunk.js": "/Aviasales/static/js/2.5712bf50.chunk.js",
-    "static/js/2.5712bf50.chunk.js.map": "/Aviasales/static/js/2.5712bf50.chunk.js.map",
+    "static/js/2.53de66ca.chunk.js": "/Aviasales/static/js/2.53de66ca.chunk.js",
+    "static/js/2.53de66ca.chunk.js.map": "/Aviasales/static/js/2.53de66ca.chunk.js.map",
     "index.html": "/Aviasales/index.html",
-    "precache-manifest.c46f3be6a575812b1e93de646303bc69.js": "/Aviasales/precache-manifest.c46f3be6a575812b1e93de646303bc69.js",
+    "precache-manifest.c778021bad1621598f40cc02eb5b59d8.js": "/Aviasales/precache-manifest.c778021bad1621598f40cc02eb5b59d8.js",
     "service-worker.js": "/Aviasales/service-worker.js",
-    "static/css/main.3dfc2880.chunk.css.map": "/Aviasales/static/css/main.3dfc2880.chunk.css.map",
-    "static/js/2.5712bf50.chunk.js.LICENSE.txt": "/Aviasales/static/js/2.5712bf50.chunk.js.LICENSE.txt",
+    "static/css/main.ce2317e4.chunk.css.map": "/Aviasales/static/css/main.ce2317e4.chunk.css.map",
+    "static/js/2.53de66ca.chunk.js.LICENSE.txt": "/Aviasales/static/js/2.53de66ca.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/Aviasales/static/media/OpenSans-SemiBold.ba5cde21.ttf",
     "static/media/check-mark.svg": "/Aviasales/static/media/check-mark.68ca57dc.svg",
     "static/media/logo.svg": "/Aviasales/static/media/logo.0c089234.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.edd56b10.js",
-    "static/js/2.5712bf50.chunk.js",
-    "static/css/main.3dfc2880.chunk.css",
-    "static/js/main.db14c407.chunk.js"
+    "static/js/2.53de66ca.chunk.js",
+    "static/css/main.ce2317e4.chunk.css",
+    "static/js/main.bc32668d.chunk.js"
   ]
 }
