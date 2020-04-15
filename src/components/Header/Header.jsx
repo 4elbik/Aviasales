@@ -1,12 +1,8 @@
-import React from "react";
+import React from 'react';
 import styled from 'styled-components';
-import logo from "../../assets/img/logo.svg";
+import logo from '../../assets/img/logo.svg';
 
-const Header = (props) => {
-    return (
-        <Logo className="header" />
-    );
-}
+const Header = () => <Logo className="header" />;
 
 const Logo = styled.div`
     margin: 0 auto;

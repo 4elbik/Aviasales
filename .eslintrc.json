@@ -5,7 +5,9 @@
     },
     "extends": [
         "plugin:react/recommended",
-        "airbnb"
+        "airbnb",
+        "prettier",
+        "prettier/react"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -20,8 +22,23 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "prettier"
     ],
     "rules": {
+        "prettier/prettier": ["error", {
+            "singleQuote": true,
+            "trailingComma": "es5",
+            "endOfLine": "lf",
+            "printWidth": 100
+          }],
+        "max-depth": ["warn", 4],
+        "id-length": ["warn", { "exceptions": ["i", "j"], "min": 2 }],
+        "no-lonely-if": ["error"],
+        "no-plusplus": ["error", {"allowForLoopAfterthoughts": true}],
+        "react/state-in-constructor": ["off"],
+        "jsx-a11y/href-no-hash": ["off"],
+        "react/jsx-props-no-spreading": ["off"],
+        "curly": "error"
     }
 }
