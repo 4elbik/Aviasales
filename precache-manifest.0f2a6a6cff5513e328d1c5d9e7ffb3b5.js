@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6000ad92e18c7392ad5a38381f90cd30",
+    "revision": "bfdff7979be0e19c8b8e8c459b511fd4",
     "url": "/Aviasales/index.html"
   },
   {
-    "revision": "e3c062411ea2152765c2",
+    "revision": "2f29fbf9b073629103ed",
     "url": "/Aviasales/static/css/main.ce2317e4.chunk.css"
   },
   {
-    "revision": "c70c9afdc1c5ecff70e4",
-    "url": "/Aviasales/static/js/2.53de66ca.chunk.js"
+    "revision": "b6e6d5c17c27ffadd2e4",
+    "url": "/Aviasales/static/js/2.7bc91405.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/Aviasales/static/js/2.53de66ca.chunk.js.LICENSE.txt"
+    "url": "/Aviasales/static/js/2.7bc91405.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "e3c062411ea2152765c2",
-    "url": "/Aviasales/static/js/main.bc32668d.chunk.js"
+    "revision": "2f29fbf9b073629103ed",
+    "url": "/Aviasales/static/js/main.238ff1a8.chunk.js"
   },
   {
     "revision": "721ef4642789a5d4e812",
