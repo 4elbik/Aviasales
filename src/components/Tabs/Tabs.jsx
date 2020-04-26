@@ -11,24 +11,25 @@ const mapDispatchToProps = {
 };
 
 const Tabs = (props) => {
-  const { activeTab, changeActiveTab } = props;
+  const { tabs, activeTab, changeActiveTab } = props;
+  const tabsKeys = Object.keys(tabs);
+
+  if (tabsKeys.length === 0) return null;
 
   return (
     <TabsWrapper>
-      <TabsButon
-        className={activeTab === 'cheap' ? 'active' : ''}
-        onClick={() => changeActiveTab('cheap')}
-        disabled={activeTab === 'cheap'}
-      >
-        Самый дешевый
-      </TabsButon>
-      <TabsButon
-        className={activeTab === 'fast' ? 'active' : ''}
-        onClick={() => changeActiveTab('fast')}
-        disabled={activeTab === 'fast'}
-      >
-        Самый быстрый
-      </TabsButon>
+      {
+        tabsKeys.map((key) => (
+          <TabsButon
+            key={key}
+            className={activeTab === key ? 'active' : ''}
+            onClick={() => changeActiveTab(key)}
+            disabled={activeTab === key}
+          >
+            { tabs[key] }
+          </TabsButon>
+        ))
+      }
     </TabsWrapper>
   );
 };

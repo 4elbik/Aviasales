@@ -1,20 +1,21 @@
 import axios from 'axios';
+import * as actionNames from './actionNames';
 
 export const changeActiveFilters = (filterName) => ({
-  type: 'ACTIVE_FILTERS_UPDATE',
+  type: actionNames.ACTIVE_FILTERS_UPDATE,
   payload: {
     filterName,
   },
 });
 
-const fetchTicketsRequest = () => ({ type: 'TICKETS_FETCH_REQUEST' });
+const fetchTicketsRequest = () => ({ type: actionNames.TICKETS_FETCH_REQUEST });
 const fetchTicketsSuccess = (response) => ({
-  type: 'TICKETS_FETCH_SUCCESS',
+  type: actionNames.TICKETS_FETCH_SUCCESS,
   payload: {
     tickets: response,
   },
 });
-const fetchTicketsFailure = () => ({ type: 'TICKETS_FETCH_FAILURE' });
+const fetchTicketsFailure = () => ({ type: actionNames.TICKETS_FETCH_FAILURE });
 
 const takeAFetch = async (dispatch) => {
   let counter = 0;
@@ -52,7 +53,7 @@ export const getTickets = () => async (dispatch) => {
 };
 
 export const changeActiveTab = (tabName) => ({
-  type: 'CHANGE_ACTIVE_TAB',
+  type: actionNames.CHANGE_ACTIVE_TAB,
   payload: {
     activeTab: tabName,
   },

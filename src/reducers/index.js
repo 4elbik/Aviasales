@@ -1,12 +1,28 @@
 import { combineReducers } from 'redux';
+import * as actionNames from '../actions/actionNames';
+import { filtersValues as activeFiltersInitial } from '../components/Filter/Filter.jsx';
 
-const activeFilters = (state = ['Все'], action) => {
+const activeFilters = (state = activeFiltersInitial, action) => {
   switch (action.type) {
-    case 'ACTIVE_FILTERS_UPDATE':
+    case actionNames.ACTIVE_FILTERS_UPDATE:
+      if (action.payload.filterName === 'Все' && state.length === activeFiltersInitial.length) {
+        return [];
+      }
+      if (action.payload.filterName === 'Все' && state.length !== activeFiltersInitial.length) {
+        return activeFiltersInitial;
+      }
+      if (action.payload.filterName !== 'Все' && state.includes('Все')) {
+        const newState = state.filter((el) => el !== 'Все');
+        return newState.filter((el) => el !== action.payload.filterName);
+      }
       if (state.includes(action.payload.filterName)) {
         return state.filter((el) => el !== action.payload.filterName);
       }
-      return [...state, action.payload.filterName];
+      const newState = [...state, action.payload.filterName];
+      if (action.payload.filterName !== 'Все' && !newState.includes('Все') && newState.length === activeFiltersInitial.length - 1) {
+        return activeFiltersInitial;
+      }
+      return newState;
     default:
       return state;
   }
@@ -14,7 +30,7 @@ const activeFilters = (state = ['Все'], action) => {
 
 const activeTab = (state = 'cheap', action) => {
   switch (action.type) {
-    case 'CHANGE_ACTIVE_TAB':
+    case actionNames.CHANGE_ACTIVE_TAB:
       return action.payload.activeTab;
     default:
       return state;
@@ -23,7 +39,7 @@ const activeTab = (state = 'cheap', action) => {
 
 const tickets = (state = [], action) => {
   switch (action.type) {
-    case 'TICKETS_FETCH_SUCCESS':
+    case actionNames.TICKETS_FETCH_SUCCESS:
       return [...state, ...action.payload.tickets];
     // case 'CHANGE_ACTIVE_TAB':
     //   if (action.payload.activeTab === 'cheap') {

@@ -11,6 +11,15 @@ const mapDispatchToProps = {
   changeActiveFilters: actions.changeActiveFilters,
 };
 
+const filters = {
+  'all-transfer': 'Все',
+  'without-transfer': 'Без пересадок',
+  'one-transfer': '1 пересадка',
+  'two-transfer': '2 пересадки',
+  'three-transfer': '3 пересадки',
+};
+export const filtersValues = Object.values(filters);
+
 class Filter extends React.Component {
   onChangeFilters = (filterName) => () => {
     const { changeActiveFilters } = this.props;
@@ -25,56 +34,20 @@ class Filter extends React.Component {
         <FilterHeader>Количество пересадок</FilterHeader>
         <form>
           <FilterList>
-            <FilterItem>
-              <FilterInput
-                id="all-transfer"
-                type="checkbox"
-                onChange={this.onChangeFilters('Все')}
-                checked={activeFilters.includes('Все')}
-              />
-              <FilterStyledSheckbox />
-              <label htmlFor="all-transfer">Все</label>
-            </FilterItem>
-            <FilterItem>
-              <FilterInput
-                id="without-transfer"
-                type="checkbox"
-                onChange={this.onChangeFilters('Без пересадок')}
-                checked={activeFilters.includes('Без пересадок')}
-              />
-              <FilterStyledSheckbox />
-              <label htmlFor="without-transfer">Без пересадок</label>
-            </FilterItem>
-            <FilterItem>
-              <FilterInput
-                id="one-transfer"
-                type="checkbox"
-                onChange={this.onChangeFilters('1 пересадка')}
-                checked={activeFilters.includes('1 пересадка')}
-              />
-              <FilterStyledSheckbox />
-              <label htmlFor="one-transfer">1 пересадка</label>
-            </FilterItem>
-            <FilterItem>
-              <FilterInput
-                id="two-transfer"
-                type="checkbox"
-                onChange={this.onChangeFilters('2 пересадки')}
-                checked={activeFilters.includes('2 пересадки')}
-              />
-              <FilterStyledSheckbox />
-              <label htmlFor="two-transfer">2 пересадки</label>
-            </FilterItem>
-            <FilterItem>
-              <FilterInput
-                id="three-transfer"
-                type="checkbox"
-                onChange={this.onChangeFilters('3 пересадки')}
-                checked={activeFilters.includes('3 пересадки')}
-              />
-              <FilterStyledSheckbox />
-              <label htmlFor="three-transfer">3 пересадки</label>
-            </FilterItem>
+            {
+              Object.keys(filters).map((key) => (
+                <FilterItem key={key}>
+                  <FilterInput
+                    id={key}
+                    type="checkbox"
+                    onChange={this.onChangeFilters(filters[key])}
+                    checked={activeFilters.includes(filters[key])}
+                  />
+                  <FilterStyledSheckbox />
+                  <label htmlFor={key}>{filters[key]}</label>
+                </FilterItem>
+              ))
+            }
           </FilterList>
         </form>
       </FilterWrapper>
@@ -167,7 +140,7 @@ const FilterStyledSheckbox = styled.span`
 
 Filter.propTypes = {
   changeActiveFilters: PropTypes.func.isRequired,
-  activeFilters: PropTypes.InstanceOf(Array).isRequired,
+  activeFilters: PropTypes.array.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

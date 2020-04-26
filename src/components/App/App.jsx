@@ -20,6 +20,11 @@ const mapDispatchToProps = {
   getTickets: actions.getTickets,
 };
 
+const tabs = {
+  'cheap': 'Самый дешевый',
+  'fast': 'Самый быстрый',
+};
+
 class App extends React.Component {
   componentDidMount() {
     const { getTickets } = this.props;
@@ -28,14 +33,14 @@ class App extends React.Component {
 
   render() {
     return (
-      <AppWrapper className="App">
+      <AppWrapper>
         <Header />
-        <Main className="main">
-          <MainSidebar className="main-sidebar">
+        <Main>
+          <MainSidebar>
             <Filter />
           </MainSidebar>
-          <MainContent className="main-content">
-            <Tabs />
+          <MainContent>
+            <Tabs tabs={tabs} />
             <Tickets />
           </MainContent>
         </Main>
