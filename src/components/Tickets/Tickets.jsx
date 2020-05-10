@@ -10,6 +10,7 @@ import {
   calculationOfArrivalTime,
   prettifyPriceNumber,
   prettifyTimeNumber,
+  ticketsSort,
 } from '../../utilities/utilities';
 
 const mapStateToProps = (state) => {
@@ -42,132 +43,70 @@ const Tickets = (props) => {
     activeTab,
   } = props;
   if (length === 0) {
-    return (
-      <Preloader />
-    );
+    return <Preloader />;
   }
 
   const maxViewTickets = 10;
-  let counterToViewTickets = 0;
-  if (activeTab === 'cheap') {
-    tickets.sort((firstElem, secondElem) => {
-      if (firstElem.price > secondElem.price) {
-        return 1;
-      }
-      if (firstElem.price < secondElem.price) {
-        return -1;
-      }
-      return 0;
-    });
-  } else if (activeTab === 'fast') {
-    tickets.forEach((ticket) => {
-      ticket.segments.sort((firstSegment, secondSegment) => {
-        if (firstSegment.duration > secondSegment.duration) {
-          return 1;
-        }
-        if (firstSegment.duration < secondSegment.duration) {
-          return -1;
-        }
-        return 0;
-      });
-    });
-    tickets.sort((firstTicket, secondTicket) => {
-      if (firstTicket.segments[0].duration > secondTicket.segments[0].duration) {
-        return 1;
-      }
-      if (firstTicket.segments[0].duration < secondTicket.segments[0].duration) {
-        return -1;
-      }
-      return 0;
-    });
-  }
+  const newTickets = ticketsSort(
+    tickets,
+    maxViewTickets,
+    filterHelpfulObj,
+    activeFilters,
+    activeTab
+  );
   return (
     <div>
       <TicketsList>
-        {tickets
-          .filter((ticket) => {
-            if (activeFilters && activeFilters.includes('Все')) {
-              if (counterToViewTickets >= maxViewTickets) {
-                return false;
-              }
-              counterToViewTickets += 1;
-              return ticket;
-            }
+        {newTickets.map((ticket) => {
+          const { price, carrier, segments: ticketsWaysList } = ticket;
 
-            const ticketTransferCounter = ticket.segments.map((el) => el.stops.length);
-            for (let i = 0; i < ticketTransferCounter.length; i += 1) {
-              if (activeFilters.includes(filterHelpfulObj[ticketTransferCounter[i]])) {
-                if (counterToViewTickets >= maxViewTickets) {
-                  return false;
-                }
-                counterToViewTickets += 1;
-                return ticket;
-              }
-            }
-            return false;
-          })
-          .map((ticket) => {
-            const { price, carrier, segments: ticketsWaysList } = ticket;
-
-            return (
-              <Ticket key={`${carrier}-${price}`}>
-                <div className="ticket-header">
-                  <span className="ticket-price">{prettifyPriceNumber(price)} Р</span>
-                  <img
-                    className="aviacompany-logo"
-                    src={`//pics.avs.io/99/36/{${carrier}}.png`}
-                    alt={`${carrier} aviacompany logo`}
-                  />
-                </div>
-                <TicketWaysList>
-                  {ticketsWaysList
-                    .filter((el) => {
-                      if (activeFilters && activeFilters.includes('Все')) return el;
-
-                      const ticketTransferCounter = el.stops.length;
-                      if (activeFilters.includes(filterHelpfulObj[ticketTransferCounter])) {
-                        return el;
-                      }
-                      return null;
-                    })
-                    .map((el) => (
-                      <li key={`${carrier}-${price}---${el.date}`} className="ticket-ways-item">
-                        <div className="ways-route">
-                          <div className="ways-route__header">
-                            {el.origin} - {el.destination}
-                          </div>
-                          <div className="ways-route__info">
-                            <time dateTime={el.date}>{renderDepartureTime(el.date)}</time>
-                            {' – '}
-                            <time
-                              dateTime={calculationOfArrivalTime(
-                                el.date,
-                                el.duration,
-                                true
-                              ).toISOString()}
-                            >
-                              {calculationOfArrivalTime(el.date, el.duration)}
-                            </time>
-                          </div>
-                        </div>
-                        <div className="ways-duration">
-                          <div className="ways-duration__header">В пути</div>
-                          <div className="ways-duration__info">
-                            {convertMinutesToDaysHoursMinutes(el.duration)}
-                          </div>
-                        </div>
-                        <div className="ways-stops">
-                          <div className="ways-stop__header">
-                            {filterHelpfulObj[el.stops.length]}
-                          </div>
-                          <div className="ways-stop__info">{el.stops.join(', ')}</div>
-                        </div>
-                      </li>
-                    ))}
-                </TicketWaysList>
-              </Ticket>
-            );
-          })}
+          return (
+            <Ticket key={`${carrier}-${price}`}>
+              <div className="ticket-header">
+                <span className="ticket-price">{prettifyPriceNumber(price)} Р</span>
+                <img
+                  className="aviacompany-logo"
+                  src={`//pics.avs.io/99/36/{${carrier}}.png`}
+                  alt={`${carrier} aviacompany logo`}
+                />
+              </div>
+              <TicketWaysList>
+                {ticketsWaysList.map((el) => (
+                  <li key={`${carrier}-${price}---${el.date}`} className="ticket-ways-item">
+                    <div className="ways-route">
+                      <div className="ways-route__header">
+                        {el.origin} - {el.destination}
+                      </div>
+                      <div className="ways-route__info">
+                        <time dateTime={el.date}>{renderDepartureTime(el.date)}</time>
+                        {' – '}
+                        <time
+                          dateTime={calculationOfArrivalTime(
+                            el.date,
+                            el.duration,
+                            true
+                          ).toISOString()}
+                        >
+                          {calculationOfArrivalTime(el.date, el.duration)}
+                        </time>
+                      </div>
+                    </div>
+                    <div className="ways-duration">
+                      <div className="ways-duration__header">В пути</div>
+                      <div className="ways-duration__info">
+                        {convertMinutesToDaysHoursMinutes(el.duration)}
+                      </div>
+                    </div>
+                    <div className="ways-stops">
+                      <div className="ways-stop__header">{filterHelpfulObj[el.stops.length]}</div>
+                      <div className="ways-stop__info">{el.stops.join(', ')}</div>
+                    </div>
+                  </li>
+                ))}
+              </TicketWaysList>
+            </Ticket>
+          );
+        })}
       </TicketsList>
     </div>
   );
@@ -240,8 +179,8 @@ const TicketWaysList = styled.ul`
 `;
 
 Tickets.propTypes = {
-  tickets: PropTypes.array.isRequired,
-  activeFilters: PropTypes.array.isRequired,
+  tickets: PropTypes.instanceOf(Array).isRequired,
+  activeFilters: PropTypes.instanceOf(Array).isRequired,
   activeTab: PropTypes.string.isRequired,
 };
 

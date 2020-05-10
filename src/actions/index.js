@@ -1,6 +1,12 @@
 import axios from 'axios';
 import * as actionNames from './actionNames';
 
+const api = axios.create({
+  baseURL: 'https://front-test.beta.aviasales.ru',
+});
+const GET_API_TOCKEN_ENDPOINT = '/search';
+const GET_TICKETS_ENDPOINT = '/tickets?searchId=';
+
 export const changeActiveFilters = (filterName) => ({
   type: actionNames.ACTIVE_FILTERS_UPDATE,
   payload: {
@@ -20,18 +26,14 @@ const fetchTicketsFailure = () => ({ type: actionNames.TICKETS_FETCH_FAILURE });
 const takeAFetch = async (dispatch) => {
   let counter = 0;
   let isSearching = true;
-  const searchId = await axios.get('https://front-test.beta.aviasales.ru/search');
+  const searchId = await api.get(GET_API_TOCKEN_ENDPOINT);
   while (counter !== 5 && isSearching) {
     try {
-      let response = await axios.get(
-        `https://front-test.beta.aviasales.ru/tickets?searchId=${searchId.data.searchId}`
-      );
+      let response = await api.get(`${GET_TICKETS_ENDPOINT}${searchId.data.searchId}`);
       dispatch(fetchTicketsSuccess(response.data.tickets));
 
       while (response.data.stop === false) {
-        response = await axios.get(
-          `https://front-test.beta.aviasales.ru/tickets?searchId=${searchId.data.searchId}`
-        );
+        response = await api.get(`${GET_TICKETS_ENDPOINT}${searchId.data.searchId}`);
         dispatch(fetchTicketsSuccess(response.data.tickets));
       }
       isSearching = false;

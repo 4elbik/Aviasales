@@ -48,3 +48,79 @@ export const prettifyPriceNumber = (num) => {
   const numberWithSpaces = num.toString();
   return numberWithSpaces.replace(/(\d{1,3}(?=(?:\d\d\d)+(?!\d)))/g, '$1 ');
 };
+
+export const ticketsSort = (
+  tickets,
+  maxViewTicketsCounter,
+  filterHelpfulObj,
+  activeFilters,
+  activeTab
+) => {
+  let counterToViewTickets = 0;
+
+  if (activeTab === 'cheap') {
+    tickets.sort((firstElem, secondElem) => {
+      if (firstElem.price > secondElem.price) {
+        return 1;
+      }
+      if (firstElem.price < secondElem.price) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+  const newTickets = tickets
+    .map((ticket) => {
+      const newSegments = ticket.segments.filter((segment) => {
+        return activeFilters.includes(filterHelpfulObj[segment.stops.length]);
+      });
+      const { ...newTicket } = ticket;
+      newTicket.segments = newSegments;
+      return newTicket;
+    })
+    .filter((ticket) => ticket.segments.length !== 0);
+  const newnewTickets = newTickets.map((ticket) => {
+    ticket.segments.sort((firstSegment, secondSegment) => {
+      if (firstSegment.duration > secondSegment.duration) {
+        return 1;
+      }
+      if (firstSegment.duration < secondSegment.duration) {
+        return -1;
+      }
+      return 0;
+    });
+    return ticket;
+  });
+  if (activeTab === 'fast') {
+    newnewTickets.sort((firstTicket, secondTicket) => {
+      if (firstTicket.segments[0].duration > secondTicket.segments[0].duration) {
+        return 1;
+      }
+      if (firstTicket.segments[0].duration < secondTicket.segments[0].duration) {
+        return -1;
+      }
+      return 0;
+    });
+  }
+  return newnewTickets.filter((ticket) => {
+    if (activeFilters && activeFilters.includes('Все')) {
+      if (counterToViewTickets >= maxViewTicketsCounter) {
+        return false;
+      }
+      counterToViewTickets += 1;
+      return ticket;
+    }
+
+    const ticketTransferCounter = ticket.segments.map((el) => el.stops.length);
+    for (let i = 0; i < ticketTransferCounter.length; i += 1) {
+      if (activeFilters.includes(filterHelpfulObj[ticketTransferCounter[i]])) {
+        if (counterToViewTickets >= maxViewTicketsCounter) {
+          return false;
+        }
+        counterToViewTickets += 1;
+        return ticket;
+      }
+    }
+    return false;
+  });
+};

@@ -18,20 +18,22 @@ const Tabs = (props) => {
 
   return (
     <TabsWrapper>
-      {
-        tabsKeys.map((key) => (
-          <TabsButon
-            key={key}
-            className={activeTab === key ? 'active' : ''}
-            onClick={() => changeActiveTab(key)}
-            disabled={activeTab === key}
-          >
-            { tabs[key] }
-          </TabsButon>
-        ))
-      }
+      {tabsKeys.map((key) => (
+        <TabsButon
+          key={key}
+          className={activeTab === key ? 'active' : ''}
+          onClick={() => changeActiveTab(key)}
+          disabled={activeTab === key}
+        >
+          {tabs[key]}
+        </TabsButon>
+      ))}
     </TabsWrapper>
   );
+};
+
+Tabs.defaultProps = {
+  tabs: {},
 };
 
 const TabsWrapper = styled.div`
@@ -75,6 +77,7 @@ const TabsButon = styled.button`
 `;
 
 Tabs.propTypes = {
+  tabs: PropTypes.instanceOf(Object),
   activeTab: PropTypes.string.isRequired,
   changeActiveTab: PropTypes.func.isRequired,
 };

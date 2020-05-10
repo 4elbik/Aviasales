@@ -34,20 +34,17 @@ class Filter extends React.Component {
         <FilterHeader>Количество пересадок</FilterHeader>
         <form>
           <FilterList>
-            {
-              Object.keys(filters).map((key) => (
-                <FilterItem key={key}>
-                  <FilterInput
-                    id={key}
-                    type="checkbox"
-                    onChange={this.onChangeFilters(filters[key])}
-                    checked={activeFilters.includes(filters[key])}
-                  />
-                  <FilterStyledSheckbox />
-                  <label htmlFor={key}>{filters[key]}</label>
-                </FilterItem>
-              ))
-            }
+            {Object.keys(filters).map((key) => (
+              <FilterItem key={key}>
+                <FilterInput
+                  id={key}
+                  type="checkbox"
+                  onChange={this.onChangeFilters(filters[key])}
+                  checked={activeFilters.includes(filters[key])}
+                />
+                <label htmlFor={key}><FilterStyledSheckbox />{filters[key]}</label>
+              </FilterItem>
+            ))}
           </FilterList>
         </form>
       </FilterWrapper>
@@ -88,6 +85,7 @@ const FilterItem = styled.li`
   line-height: 20px;
 
   & label {
+    position: relative;
     padding: 10px 20px;
     padding-left: 50px;
     width: 100%;
@@ -111,11 +109,11 @@ const FilterInput = styled.input`
     clip: rect(0 0 0 0);
     overflow: hidden;
 
-    &:checked + span {
+    &:checked + label span {
       border-color: #2196F3;
     }
     
-    &:checked + span::before {
+    &:checked + label span::before {
       content: "";
       display: block;
       width: 12px;
@@ -140,7 +138,7 @@ const FilterStyledSheckbox = styled.span`
 
 Filter.propTypes = {
   changeActiveFilters: PropTypes.func.isRequired,
-  activeFilters: PropTypes.array.isRequired,
+  activeFilters: PropTypes.instanceOf(Array).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

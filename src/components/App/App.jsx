@@ -8,21 +8,13 @@ import Tabs from '../Tabs';
 import Tickets from '../Tickets';
 import * as actions from '../../actions';
 
-// const mapStateToProps = (state) => {
-//   const props = {
-//     filters: state.filters,
-//   };
-
-//   return props;
-// }
-
 const mapDispatchToProps = {
   getTickets: actions.getTickets,
 };
 
 const tabs = {
-  'cheap': 'Самый дешевый',
-  'fast': 'Самый быстрый',
+  cheap: 'Самый дешевый',
+  fast: 'Самый быстрый',
 };
 
 class App extends React.Component {

@@ -19,7 +19,11 @@ const activeFilters = (state = activeFiltersInitial, action) => {
         return state.filter((el) => el !== action.payload.filterName);
       }
       const newState = [...state, action.payload.filterName];
-      if (action.payload.filterName !== 'Все' && !newState.includes('Все') && newState.length === activeFiltersInitial.length - 1) {
+      if (
+        action.payload.filterName !== 'Все' &&
+        !newState.includes('Все') &&
+        newState.length === activeFiltersInitial.length - 1
+      ) {
         return activeFiltersInitial;
       }
       return newState;
